@@ -1,0 +1,10 @@
+- name: Set up Ad ontroller
+  win_domain:
+    dns_domain_name: "{{ ad_domain_name }}"
+    safe_mode_password: "{{ ad_safe_mode_password }}"
+
+
+- name: Reboot the machine
+  win_reboot:
+    msg:
+

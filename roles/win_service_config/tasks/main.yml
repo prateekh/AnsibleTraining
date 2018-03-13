@@ -1,0 +1,30 @@
+---
+# tasks file for win_service_config
+#
+- name: Install multiple packages
+  win_chocolatey:
+    name: "{{ item.package_name }}"
+    state: present
+    params: "{{ item.parameters }}"
+  with_items:
+  - "{{ packages }}"
+
+- name: Start a service
+  win_service:
+    name: "{{ item.service_name }}"
+    state: started
+  with_items:
+  - "{{ packages }}"
+
+- name: Firewall rule 
+  win_firewall_rule:
+    name: "{{ item.service_name }}"
+    localport: "{{ item.local_port }}"
+    action: allow
+    direction: in
+    protocol: "{{ item.protocol_name }}"
+    state: present
+    enabled: yes
+  with_items:
+  - "{{ packages }}"
+

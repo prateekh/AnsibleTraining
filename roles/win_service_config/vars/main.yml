@@ -1,0 +1,9 @@
+---
+# vars file for win_service_config
+
+packages:
+ - package_name: 'openssh' 
+   parameters: '/SSHServerFeature' 
+   service_name: 'SSHD' 
+   local_port: '22' 
+   protocol_name: 'tcp'
